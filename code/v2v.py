@@ -66,19 +66,21 @@ class Shot(object):
     def get_view_height(self):
         return int(self.driver.execute_script("return window.innerHeight"))
 
-    def pan(self, top, bottom):
-        print(f"pan: {top} -> {bottom} ")
-        for h in range(top, bottom, 1):
-            self.driver.execute_script(f"window.scrollTo(0,{h});")
+    def pan(self, top, bottom, step_size):
+        print(f"pan: {top} -> {bottom} ({step_size}) ")
+        self.driver.execute_script(f"window.scrollTo(0,{top});")
 
-    def pan_element(self, selector):
+        for h in range(top, bottom, step_size):
+            self.driver.execute_script(f"window.scrollTo({{'top': {h}}});")
+
+    def pan_element(self, selector, step_size=1):
         el = self.driver.find_element_by_css_selector(selector)
 
         top = el.location["y"]
         bottom = int(el.location["y"] + el.size["height"] - self.get_view_height())
-        self.pan(top, bottom)
+        self.pan(top, bottom, step_size)
 
-    def pan_between(self, selector_from, selector_to):
+    def pan_between(self, selector_from, selector_to, step_size):
         el_top = self.driver.find_element_by_css_selector(selector_from)
         el_bottom = self.driver.find_element_by_css_selector(selector_to)
 
@@ -86,9 +88,10 @@ class Shot(object):
         bottom = int(
             el_bottom.location["y"] + el_bottom.size["height"] - self.get_view_height()
         )
-        self.pan(top, bottom)
+        self.pan(top, bottom, step_size)
 
     def linger(self, selector, duration, align=None, offset=None, smooth=None):
+        el = self.driver.find_element_by_css_selector(selector)
         if align is None:
             align = "middle"
 
@@ -96,7 +99,7 @@ class Shot(object):
             offset = 0
 
         if align == "middle":
-            offset -= self.get_view_height() / 2
+            offset -= self.get_view_height() / 2 - el.size["height"] / 2
 
         if align == "bottom":
             offset -= self.get_view_height()
@@ -107,7 +110,6 @@ class Shot(object):
         if smooth is None:
             smooth = False
 
-        el = self.driver.find_element_by_css_selector(selector)
         offset += el.location["y"]
 
         if smooth:
@@ -143,6 +145,7 @@ class Film(object):
             shot.shutdown()
         with open("temp_concat.txt", "w") as f:
             f.write("\n".join([f"file '{x}'" for x in clips]))
+        time.sleep(1)
         subprocess.check_call(
             f"ffmpeg -y -f concat -i temp_concat.txt -c copy {self.outfile}".split()
         )

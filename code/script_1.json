@@ -3,8 +3,41 @@
     "width": 1280,
     "shots": [
         {
+            "url": "https://svenska.yle.fi/dataviz/2014/estonia-20/",
+            "actions": [
+                {
+                    "type": "linger",
+                    "params": {
+                        "selector": "div.yddviz-clock:nth-child(28) > div:nth-child(1) > span:nth-child(2)",
+                        "duration": 3,
+                        "align": "top",
+                        "offset": 0,
+                        "smooth": true
+                    }
+                },
+                {
+                    "type": "linger",
+                    "params": {
+                        "selector": ".yddviz-gifani",
+                        "duration": 3,
+                        "align": "middle",
+                        "offset": 0,
+                        "smooth": true
+                    }
+                }
+            ]
+        },
+        {
             "url": "https://www.svt.se/special/sa-rostade-svenskarna/",
             "actions": [
+                {
+                    "type": "pan_between",
+                    "params": {
+                        "selector_from": "h2",
+                        "selector_to": "div._3nQiY:nth-child(3) > h4:nth-child(2)",
+                        "step_size": 1
+                    }
+                },
                 {
                     "type": "linger",
                     "params": {
@@ -19,22 +52,10 @@
                     "type": "linger",
                     "params": {
                         "selector": "div._3nQiY:nth-child(13)",
-                        "duration": 5,
+                        "duration": 3,
                         "align": "top",
                         "offset": 20,
                         "smooth": true
-                    }
-                }
-            ]
-        },
-        {
-            "url": "https://svenska.yle.fi/artikel/2018/03/30/din-generation-hur-har-det-gatt-for-er-som-ar-fodda-samma-ar",
-            "actions": [
-                {
-                    "type": "pan_between",
-                    "params": {
-                        "selector_from": "#main-content",
-                        "selector_to": "#comments"
                     }
                 }
             ]
