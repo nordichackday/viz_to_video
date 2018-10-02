@@ -10,3 +10,9 @@ profile_default/
 ipython_config.py
 
 *.log
+
+code/media/
+code/*.txt
+code/*.mp4
+
+.vscode

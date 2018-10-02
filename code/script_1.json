@@ -1,0 +1,43 @@
+{
+    "height": 720,
+    "width": 1280,
+    "shots": [
+        {
+            "url": "https://www.svt.se/special/sa-rostade-svenskarna/",
+            "actions": [
+                {
+                    "type": "linger",
+                    "params": {
+                        "selector": "div._3nQiY:nth-child(7) > p:nth-child(2)",
+                        "duration": 3,
+                        "align": "top",
+                        "offset": 20,
+                        "smooth": true
+                    }
+                },
+                {
+                    "type": "linger",
+                    "params": {
+                        "selector": "div._3nQiY:nth-child(13)",
+                        "duration": 5,
+                        "align": "top",
+                        "offset": 20,
+                        "smooth": true
+                    }
+                }
+            ]
+        },
+        {
+            "url": "https://svenska.yle.fi/artikel/2018/03/30/din-generation-hur-har-det-gatt-for-er-som-ar-fodda-samma-ar",
+            "actions": [
+                {
+                    "type": "pan_between",
+                    "params": {
+                        "selector_from": "#main-content",
+                        "selector_to": "#comments"
+                    }
+                }
+            ]
+        }
+    ]
+}
